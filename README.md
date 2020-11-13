@@ -6,7 +6,7 @@ This is a pure javascript based form validation plugin. Validations range from E
 Usage Example :- 
 
 // Example - HOW TO USE THE k2validator.js
-    
+    ```sh
         fields = [
             {
                 option: "Alphanumeric",
@@ -24,6 +24,7 @@ Usage Example :-
         var validationResult = validate(fields);
 
         validationResult returns True on success else error message on validation error.
+        ```
 //ENDS
 
 
