@@ -5,7 +5,6 @@ This is a pure javascript based form validation plugin. Validations range from E
 
 // Example - HOW TO USE THE k2validator.js
 
-####Code Blocks (Indented style)
    ```javascript
  fields = [
         {
@@ -24,8 +23,6 @@ This is a pure javascript based form validation plugin. Validations range from E
     var validationResult = validate(fields);
 ```
 
-
-    validationResult returns True on success else error message on validation error.
-//ENDS
+<pre>validationResult returns True on success else error message on validation error.</pre>
 
 Please note:- **This plugin is under development.**
