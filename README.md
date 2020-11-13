@@ -1,9 +1,9 @@
-# k2validator
+# K2 Validator - A Javascript Validation Plugin
 
 
 This is a pure javascript based form validation plugin. Validations range from Email, Phone, Alphanumeric, Numeric and Decimal and IP. It used regex for validation.
 
-// Example - HOW TO USE THE k2validator.js
+**How can you use for test or learning purpose ?**
 
    ```javascript
  fields = [
