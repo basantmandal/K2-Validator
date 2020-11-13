@@ -3,7 +3,7 @@
 
 This is a pure javascript based form validation plugin. Validations range from Email, Phone, Alphanumeric, Numeric and Decimal and IP. It used regex for validation.
 
-**How can you use for test or learning purpose ?**
+**How can you use for test or learning purpose ? You can go through the index.html or else read below**
 
    ```javascript
  fields = [
