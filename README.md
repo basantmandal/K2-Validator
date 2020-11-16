@@ -1,12 +1,15 @@
 # K2 Validator - A JavaScript Validation Plugin
 
 
-This is a pure JavaScript based form validation plugin. Validations range from Email, Phone, Alphanumeric, Numeric and Decimal and IP. It used regex for validation.
+This is a pure JavaScript based form Validation Plugin.
+Validations range from Email, Phone & Text. It uses regex for validation.
+Apart from Validation, It even sanitize, user input value.
+
 
 ## Features
-    * Lightweight (~6kb)
-    * Sanitization
-    * You can customize as per your needs
+    * Easy & Lightweight (~6kb)
+    * User Form Data Sanitization
+    * Very Easy to Customize as per your needs
 
 ## Compatibility
 
