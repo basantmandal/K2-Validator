@@ -1,77 +1,63 @@
 /*
- * k2validator.js 0.0 .1 - 13 - November - 2020
- * Copyright (c) 2020 Basant Mandal, http://wwww.techbasant.in
+ * k2validator.js 0.0.2 - 16 - November - 2020
+ * Copyright (c) 2020 Basant Mandal, https://wwww.techbasant.in
  * k2validator.js is open sourced under the MIT license.
  * https://github.com/basantmandal/k2validator
  */
 
 var defaults = {
-    messages:
-    {
-        required: 'The %s field is required.',
+    messages: {
+        required: "The %s field is required."
     },
-    options:
-    {
-        version: "0.0.1",
-        last_update: "13-November-2020",
+    options: {
+        version: "0.0.2",
+        last_update: "16-November-2020",
         debug: false,
-        test: false
+        test: false,
+        errorClass: "is-invalid"
     }
 };
+console.log("K2 Validator - Enabled - Version " + defaults.options.version + "\nLast Updated :- " + defaults.options.last_update + "\n\n");
 
-console.log("Validation JS Enabled :- " + defaults.options.version + "\nLast Updated :- " + defaults.options.last_update);
-/**
- * This Function Basically Loops
- *
- * @param arrayFields
- * option: option
- * value: value of input
- * lengthMin: "1",
- * lengthMax: "20",
- * errorMessage: "Enter First Name",
- * @param {boolean} [debug=false]
- * @return {object {status, message}}
+/*
+ * PURPOSE : CHECKS FOR EMPTY STRING
+ *  PARAMS :  str
+ * RETURNS :  True/False
  */
-function validate(arrayFields, debug = defaults.options.debug)
-{
-    console.log("debug" + debug);
-    var error = [];
-    var errorLog = "";
-    if (arrayFields.length > 0)
-    {
-        for (i = 0; i < arrayFields.length; i++)
-        {
-            let option = arrayFields[i]["option"];
-            let value = arrayFields[i]["value"];
-            let lengthMin = arrayFields[i]["lengthMin"] < 0 ? 1 : arrayFields[i]["lengthMin"];
-            let lengthMax = arrayFields[i]["lengthMax"] < 0 ? 1 : arrayFields[i]["lengthMax"];
-            let matches = arrayFields[i]["matches"].trim() = = "" ? false : arrayFields[i]["matches"];
-            if (debug)
-            {
-                console.log("Option =" + option);
-                console.log("Value =" + value);
-                console.log("Length Min =" + lengthMin);
-                console.log("Length Max = =" + lengthMax);
-                console.log("\n");
-            }
-            if (!regexTester(option, value, lengthMin, lengthMax, matches))
-            {
-                error.push(arrayFields[i]["errorMessage"] + "<br>");
+
+function isEmpty(str) {
+    return (!str || 0 === str.length);
+}
+
+/*
+ * PURPOSE : Validates with validationEngine Function
+ *  PARAMS : formName, Debug as Boolean
+ * RETURNS : Erros if any with status and messages as an object
+ */
+let validateMyForm = (formName, debug = defaults.options.debug) => {
+    try {
+        var form = document.getElementById(formName);
+        var allFormControls = form.elements;
+        var errors = [];
+        for (let cell of allFormControls) {
+            let result = validationEngine(cell);
+            if (!isEmpty(result)) {
+                if (debug) {
+                    console.log("Validation Status = " + result);
+                }
+                errors.push(result);
             }
         }
-
-        // Let's check if any errors then push to return
-        if (error.length < 1)
-        {
+        // LETS RETURN VALIDATION RESULT
+        if (errors.length < 1) {
             return {
                 status: true,
                 message: "validation success",
             };
         }
-        else
-        {
-            error.forEach(function(value)
-            {
+        else {
+            let errorLog = "";
+            errors.forEach(function (value) {
                 errorLog += value;
             });
             return {
@@ -80,53 +66,99 @@ function validate(arrayFields, debug = defaults.options.debug)
             };
         }
     }
+    catch (e) {
+        console.log("Catched Error \n" + e);
+    }
+};
+
+var validationEngine = (cell, debug = defaults.options.debug) => {
+    var errors = [];
+    var status = true;
+
+    if (cell.getAttribute("type") != "button" && cell.getAttribute("type") != "submit" && cell.getAttribute("data-required") == "required") {
+        // Input Tags Attribute
+        input_id = cell.getAttribute("id");
+        input_type = cell.getAttribute("type");
+        input_required = cell.getAttribute("data-required");
+        input_max_length = cell.getAttribute("data-maxlength");
+        input_min_length = cell.getAttribute("data-minlength");
+        input_value = isEmpty(cell.value) ? "" : sanitizeInput(cell.value);
+        input_field_name = isEmpty(cell.getAttribute("data-field-name")) ? input_id : cell.getAttribute("data-field-name").trim();
+        input_error_message = isEmpty(cell.getAttribute("data-error-message")) ? input_field_name + " is required." : cell.getAttribute("data-error-message").trim();
+
+        result = regexTester(input_type);
+        if (debug) {
+            console.log("Input ID = " + input_id);
+            console.log("Type = " + input_type);
+            console.log("Required = " + input_required);
+            console.log("Max Length = " + input_max_length);
+            console.log("Min Length = " + input_min_length);
+            console.log("Value = " + input_value);
+            console.log("Error Msg = " + input_error_message);
+            console.log("\n");
+            console.log("Regex Result = " + result);
+            console.log("\n\n");
+        }
+
+        // CHECK FOR DATA MATCH
+        if (!isEmpty(cell.getAttribute("data-match"))) {
+            let pass1 = document.getElementById(cell.getAttribute("data-match"));
+            let data_set = pass1.getAttribute("data-field-name");
+            if (input_value != document.getElementById(cell.getAttribute("data-match")).value) {
+                input_error_message += "<br>Both " + data_set + " & " + input_field_name + " must match " + "<br>";
+                result = false;
+            }
+        }
+
+        //WHEN VALIDATION FAILS
+        if (!result) {
+            // ADD CLASS BOTOSTRAP ERROR - is-invalid IN INPUT TAG
+            cell.classList.add(defaults.options.errorClass);
+            return (input_error_message + "<br>");
+        }
+        else {
+            cell.classList.remove(defaults.options.errorClass);
+            return false;
+        }
+    }
 }
 
-function regexTester(option, value, lengthMin = 1, lengthMax = 20, matches = false, debug = defaults.options.debug)
-{
-    var regex = "";
-    switch (option)
-    {
-        case "Alphanumeric":
-            regex = new RegExp("^[a-zA-Z0-9]{" + lengthMin + "," + lengthMax + "}$");
-            break;
-        case "Integer":
-            regex = new RegExp("^[0-9]{" + lengthMin + "," + lengthMax + "}$");
-            break;
-        case "Decimal":
-            regex = new RegExp("^-?[0-9]*.?[0-9]+$");
-            break;
-        case "Email":
-            regex = new RegExp("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
-            break;
-        case "IP":
-            regex = new RegExp("^ ((25[0-5] | 2[0-4][0-9] | 1[0-9]{ 2 }| [0-9]{ 1, 2 }) .) { 3 } (25[0-5] | 2[0-4][0-9] | 1[0-9]{ 2 }| [0-9]{ 1, 2 }) $ / i");
-            break;
-        case "DATE":
-            regex = new RegExp("d{4}-d{1,2}-d{1,2}");
-            break;
-        default:
-            regex = new RegExp("^[A-Za-z0-9 ]+$");
+/*
+ * PURPOSE : Test Values Against Types (text, number, email & etc)
+ *  PARAMS : input_type
+ * RETURNS :  True/False
+ */
+
+function regexTester(input_type) {
+    switch (input_type) {
+    case "text":
+        if (input_min_length < 1) {
+            input_min_length = 1;
+        }
+        if (input_max_length < 1) {
+            input_max_length = 100;
+        }
+        regex = new RegExp("^[a-zA-Z0-9]{" + input_min_length + "," + input_max_length + "}$");
+        break;
+    case "number":
+        regex = new RegExp("^-?[0-9]*.?[0-9]+$");
+        break;
+    case "email":
+        regex = new RegExp("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
+        break;
+    default:
+        regex = new RegExp("^[A-Za-z0-9 ]+$");
     }
-    let result = value.trim().match(regex) ? true : false;
-    if (debug)
-    {
-        console.log("Result = " + result);
-    }
-    return result;
+
+    return input_value.match(regex) ? true : false;
 }
 
-if (defaults.options.test)
-{
-    console.clear();
-    console.log("Test Mode Enabled\n\n");
-    test1 = ["ab", "a b 1c", "abced1", "12", "12345 012344", "      ", "122323.0087", "1234545", "basant@gmail.com", "basant_mandal@led.in"];
-    for (testvalue of test1)
-    {
-        console.log("Test Alphanumeric on " + testvalue + " = " + regexTester("Alphanumeric", testvalue));
-        console.log("Test Numeric on " + testvalue + " = " + regexTester("Integer", testvalue));
-        console.log("Test Email on " + testvalue + " = " + regexTester("Email", testvalue));
-        console.log("Test Decimal on " + testvalue + " = " + regexTester("Decimal", testvalue));
-        console.log("\n");
-    }
+/*
+ * PURPOSE : Sanitize The Input
+ *  PARAMS : String to be Sanitized
+ * RETURNS : Safe string
+ */
+
+function sanitizeInput(string) {
+    return string.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;').trim();
 }

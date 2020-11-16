@@ -6,73 +6,78 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!-- Title tags -->
-    <title>Form Validation using K2 Validator (Javascript)</title>
+    <title>Form Validation - K2 Validator </title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <!-- Optional theme -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
 
-        body {
+        body
+        {
             background: rgba(246, 246, 247, 1);
             color: rgba(32, 34, 35, 1);
             font-family: "Ubuntu", sans-serif;
         }
 
-        .header_label {
+        .header_label
+        {
             font-weight: 600;
             border-bottom: 1px solid darkblue;
             padding: 6px 2px;
         }
 
-        .col-form-label {
+        .col-form-label
+        {
             font-size: 15px;
             font-weight: 400;
         }
 
-        .hide {
+        .hide
+        {
             display: none;
         }
     </style>
 </head>
 
 <body>
-    <div class="container-fluid h-100">
-        <div class="row justify-content-center align-items-center h-100">
-            <div class="col col-xs-12 col-sm-12 col-md-12 text-center header_label">
-                <h3>DEMO FORM</h3>
-            </div>
-            <section id="error" class="col-xs-12 col-sm-5 hide">
-                <br />
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Oops!!</strong>
-                    <br />
-                    <span class="error_message"></span>
+    <form name="custForm" id="custForm" action="#" class="custForm">
+        <div class="container-fluid h-100">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col col-xs-12 col-sm-12 col-md-12 text-center header_label">
+                    <h3>Sample Form</h3>
                 </div>
-            </section>
-        </div>
 
-        <div style="clear: both"></div>
-        <div class="row justify-content-center align-items-center h-100">
-            <div class="col-xs-12 col-sm-5" style="margin-top: 3%">
-                <form id="form1">
+                <section id="error" class="col-xs-12 col-sm-5 hide">
+                    <br />
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Oops!!</strong>
+                        <br />
+                        <span id="error_message"></span>
+                    </div>
+                </section>
+                <div style="clear: both"></div>
+            </div>
+
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-xs-12 col-sm-5" style="margin-top: 3%">
                     <div class="form-group row">
                         <label for="text" class="col-4 col-form-label">First Name</label>
                         <div class="col-8">
                             <div class="input-group">
-                                <input id="firstName" name="firstName" type="text" class="form-control" data-error-message="Enter First Name" />
+                                <input id="firstName" name="firstName" type="text" class="form-control" data-error-message="Enter First Name" data-maxlength="20" data-minlength="2" data-required="required" data-field-name="First Name" />
                             </div>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label for="text" class="col-4 col-form-label">Last Name</label>
                         <div class="col-8">
                             <div class="input-group">
-                                <input id="lastName" name="lastName" type="text" class="form-control" />
+                                <input id="lastName" name="lastName" type="text" class="form-control" data-error-message="Enter Last Name" data-required="required" data-field-name="Last Name" />
                             </div>
                         </div>
                     </div>
@@ -80,7 +85,20 @@
                         <label for="text" class="col-4 col-form-label">Email</label>
                         <div class="col-8">
                             <div class="input-group">
-                                <input id="emailID" name="emailID" type="email" class="form-control" />
+                                <input id="emailID" name="emailID" type="email" class="form-control" data-error-message="Enter Email ID" data-required="required" data-field-name="Email ID" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="text" class="col-4 col-form-label">Country</label>
+                        <div class="col-8">
+                            <div class="input-group">
+                                <select id="country" name="country" class="form-control" data-error-message="Select Country" data-required="required" data-field-name="Country">
+                                    <option disabled selected></option>
+                                    <option value="USA">United States of America</option>
+                                    <option value="UK">United Kingdom</option>
+                                    <option value="IN">India</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -88,7 +106,7 @@
                         <label for="text" class="col-4 col-form-label">Password</label>
                         <div class="col-8">
                             <div class="input-group">
-                                <input id="pass1" name="pass1" type="password" class="form-control" />
+                                <input id="pass1" name="pass1" type="password" class="form-control" data-error-message="Enter Password" data-required="required" data-field-name="Password" />
                             </div>
                         </div>
                     </div>
@@ -96,82 +114,42 @@
                         <label for="text" class="col-4 col-form-label">Confirmation Password</label>
                         <div class="col-8">
                             <div class="input-group">
-                                <input id="pass2" name="pass2" type="password" class="form-control" />
+                                <input id="pass2" name="pass2" type="password" class="form-control" data-error-message="Enter Confirm Password" data-required="required" data-field-name="Confirm Password" data-match="pass1" />
                             </div>
                         </div>
                     </div>
                     <div class="form-group row justify-content-center align-items-center">
                         <div class="col-6">
-                            <br />
-                            <button class="btn btn-warning btn-block" type="reset" id="resetForm">RESET</button>
-                        </div>
-                        <div class="col-6">
-                            <br />
-                            <button class="btn btn-danger btn-block" type="submit">VALIDATE FORM</button>
+                            <br>
+                            <button class="btn btn-danger btn-block" type="button" id="validateForm">VALIDATE FORM</button>
                         </div>
                     </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <script src="validation.js"></script>
-    <script>
-        var form = document.querySelector("form");
-        var error_section = document.getElementById("error");
-        var error_message = document.querySelectorAll(".error_message");
-        var resetBtn = document.getElementById("resetForm");
-        // Example - HOW TO USE THE k2validator.js
-        form.addEventListener("submit", (event) => {
-            fields = [{
-                option: "Alphanumeric",
-                value: document.getElementById("firstName").value,
-                lengthMin: "1",
-                lengthMax: "20",
-                errorMessage: "Enter First Name",
-            }, {
-                option: "Alphanumeric",
-                value: document.getElementById("lastName").value,
-                lengthMin: "1",
-                lengthMax: "20",
-                errorMessage: "Enter Last Name",
-            }, {
-                option: "Email",
-                value: document.getElementById("emailID").value,
-                errorMessage: "Enter Email",
-            }, {
-                option: "Alphanumeric",
-                value: document.getElementById("pass1").value,
-                errorMessage: "Enter Password",
-            }, {
-                option: "Alphanumeric",
-                value: document.getElementById("pass2").value,
-                errorMessage: "Enter Confirm Password",
-            }, ];
-            var validationResult = validate(fields);
-            if (!validationResult["status"]) {
-                error_section.classList.remove("hide");
-                error_message.forEach((index) => {
-                    index.innerHTML = "";
-                });
-                error_message.forEach((index) => {
-                    index.innerHTML = validationResult["message"];
-                });
-                console.log("Form has error we cannot continue....");
-            } else {
-                error_section.classList.add("hide");
-                alert("Lets Submit....");
-            }
-            event.preventDefault();
-        });
-        //ENDS
+                </div>
+            </div> <!-- Row DIV Ends -->
+        </div> <!-- Container DIV Ends -->
+    </form>
 
-        resetBtn.addEventListener("click", () => {
-            error_message.forEach((index) => {
-                index.innerHTML = "";
-            });
-            error_section.classList.add("hide");
-        });
+    <script src="k2validator.js"></script>
+    <script>
+        let submitBtn = document.getElementById("validateForm");
+        submitBtn.addEventListener("click", () =>
+        {
+            var formError = validateMyForm("custForm");
+            if (!formError.status)
+            {
+                document.getElementById("error").classList.remove("hide");
+                document.getElementById("error_message").innerHTML = formError.message;
+            }
+            else
+            {
+                document.getElementById("error").classList.add("hide");
+                document.getElementById("error_message").innerHTML = "";
+                alert("Form Validated");
+                return false;
+            }
+        })
     </script>
+
 </body>
 
 </html>
