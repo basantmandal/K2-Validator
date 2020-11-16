@@ -13,7 +13,7 @@ Apart from Validation, It even sanitize, user input value.
 
 ## Compatibility
 
-K2 Validator has been tested on all major browsers
+## K2 Validator has been tested on all major browsers
     * Chrome    > 85
     * Firefox   > 82
     * Opera     > 72
