@@ -17,14 +17,14 @@ K2 Validator has been tested on all major browsers
 
 
 ## Problems/Questions/Bugs?
-* Yes! You can contribute opening - https://github.com/igorescobar/jQuery-Mask-Plugin/issues. Fix it and help others
+* Yes! You can contribute opening - https://github.com/basantmandal/k2validator/issues. Fix it and help others
 * Do you think that something in our document should be better? Do you have a cool idea to increase the awesomeness? Summit your pull request with your idea!
 
 
 **How can you use for test or learning purpose ? You can go through the index.html or else read below**
 
-   ```javascript
 <pre>EXAMPLE</pre>
+   ```javascript
 <input id="firstName" name="firstName" type="text" class="form-control" data-error-message="Enter First Name" data-maxlength="20" data-minlength="2" data-required="required" data-field-name="First Name" />
 data-error-message="Enter First Name"  // ERROR MESSAGE
 data-maxlength="20"                    // MAX LENGTH
@@ -41,7 +41,7 @@ if (!formError.status)
 }
 ```
 
-<pre>validateMyForm returns True on success else error message on validation error.</pre>
+<pre><b>validateMyForm</b> returns True on success else error message on validation error.</pre>
 
 
 Please note:- **This plugin is under development.**
