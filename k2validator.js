@@ -1,5 +1,5 @@
 /*
- * k2validator.js 0.0.2 - 16 - November - 2020
+ * k2validator.js 0.0.3 - 20 - March - 2021
  * Copyright (c) 2020 Basant Mandal, https://wwww.techbasant.in
  * k2validator.js is open sourced under the MIT license.
  * https://github.com/basantmandal/k2validator
@@ -11,7 +11,7 @@ var defaults = {
     },
     options: {
         version: "0.0.2",
-        last_update: "16-November-2020",
+        last_update: "20-March-2021",
         debug: false,
         test: false,
         errorClass: "is-invalid"
@@ -24,8 +24,7 @@ console.log("K2 Validator - Enabled - Version " + defaults.options.version + "\n
  *  PARAMS :  str
  * RETURNS :  True/False
  */
-
-function isEmpty(str) {
+let isEmpty = (str) => {
     return (!str || 0 === str.length);
 }
 
@@ -54,8 +53,7 @@ let validateMyForm = (formName, debug = defaults.options.debug) => {
                 status: true,
                 message: "validation success",
             };
-        }
-        else {
+        } else {
             let errorLog = "";
             errors.forEach(function (value) {
                 errorLog += value;
@@ -112,11 +110,10 @@ var validationEngine = (cell, debug = defaults.options.debug) => {
 
         //WHEN VALIDATION FAILS
         if (!result) {
-            // ADD CLASS BOTOSTRAP ERROR - is-invalid IN INPUT TAG
+            // ADD CLASS BOOTSTRAP ERROR - is-invalid IN INPUT TAG
             cell.classList.add(defaults.options.errorClass);
             return (input_error_message + "<br>");
-        }
-        else {
+        } else {
             cell.classList.remove(defaults.options.errorClass);
             return false;
         }
@@ -129,25 +126,25 @@ var validationEngine = (cell, debug = defaults.options.debug) => {
  * RETURNS :  True/False
  */
 
-function regexTester(input_type) {
+let regexTester = (input_type) => {
     switch (input_type) {
-    case "text":
-        if (input_min_length < 1) {
-            input_min_length = 1;
-        }
-        if (input_max_length < 1) {
-            input_max_length = 100;
-        }
-        regex = new RegExp("^[a-zA-Z0-9]{" + input_min_length + "," + input_max_length + "}$");
-        break;
-    case "number":
-        regex = new RegExp("^-?[0-9]*.?[0-9]+$");
-        break;
-    case "email":
-        regex = new RegExp("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
-        break;
-    default:
-        regex = new RegExp("^[A-Za-z0-9 ]+$");
+        case "text":
+            if (input_min_length < 1) {
+                input_min_length = 1;
+            }
+            if (input_max_length < 1) {
+                input_max_length = 100;
+            }
+            regex = new RegExp("^[a-zA-Z0-9]{" + input_min_length + "," + input_max_length + "}$");
+            break;
+        case "number":
+            regex = new RegExp("^-?[0-9]*.?[0-9]+$");
+            break;
+        case "email":
+            regex = new RegExp("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
+            break;
+        default:
+            regex = new RegExp("^[A-Za-z0-9 ]+$");
     }
 
     return input_value.match(regex) ? true : false;
@@ -159,6 +156,7 @@ function regexTester(input_type) {
  * RETURNS : Safe string
  */
 
-function sanitizeInput(string) {
+let sanitizeInput = (string) => {
+    console.log("Called");
     return string.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;').trim();
 }

@@ -1,6 +1,5 @@
 # K2 Validator - A JavaScript Validation Plugin
 
-
 This is a pure JavaScript based form Validation Plugin.
 Validations range from Email, Phone & Text. It uses regex for validation.
 Apart from Validation, It even sanitize, user input value.
@@ -37,8 +36,7 @@ data-field-name="First Name"           // FIELD NAME TO SHOW DURING ERROR
 
 var formError = validateMyForm("formID");
 
-if (!formError.status)
-{
+if (!formError.status){
   formError.status  // RETURN TRUE/FALSE ON VALIDATION
   formError.message // ALL ERROR MESSAGES
 }

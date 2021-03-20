@@ -3,12 +3,22 @@
 
 <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <!-- Title tags -->
     <title>Form Validation - K2 Validator </title>
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
     <!-- Optional theme -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -16,139 +26,142 @@
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
 
-        body
-        {
+        body {
             background: rgba(246, 246, 247, 1);
             color: rgba(32, 34, 35, 1);
             font-family: "Ubuntu", sans-serif;
         }
 
-        .header_label
-        {
+        .header_label {
             font-weight: 600;
             border-bottom: 1px solid darkblue;
             padding: 6px 2px;
         }
 
-        .col-form-label
-        {
+        .col-form-label {
             font-size: 15px;
             font-weight: 400;
         }
 
-        .hide
-        {
+        .hide {
             display: none;
         }
     </style>
 </head>
 
 <body>
-    <form name="custForm" id="custForm" action="#" class="custForm">
-        <div class="container-fluid h-100">
-            <div class="row justify-content-center align-items-center h-100">
-                <div class="col col-xs-12 col-sm-12 col-md-12 text-center header_label">
-                    <h3>Sample Form</h3>
-                </div>
-
-                <section id="error" class="col-xs-12 col-sm-5 hide">
-                    <br />
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Oops!!</strong>
-                        <br />
-                        <span id="error_message"></span>
-                    </div>
-                </section>
-                <div style="clear: both"></div>
+<form name="custForm" id="custForm" action="#" class="custForm">
+    <div class="container-fluid h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col col-xs-12 col-sm-12 col-md-12 text-center header_label">
+                <h3>Sample Form</h3>
             </div>
 
-            <div class="row justify-content-center align-items-center h-100">
-                <div class="col-xs-12 col-sm-5" style="margin-top: 3%">
-                    <div class="form-group row">
-                        <label for="text" class="col-4 col-form-label">First Name</label>
-                        <div class="col-8">
-                            <div class="input-group">
-                                <input id="firstName" name="firstName" type="text" class="form-control" data-error-message="Enter First Name" data-maxlength="20" data-minlength="2" data-required="required" data-field-name="First Name" />
-                            </div>
-                        </div>
-                    </div>
+            <section id="error" class="col-xs-12 col-sm-5 hide">
+                <br/>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Oops!!</strong>
+                    <br/>
+                    <span id="error_message"></span>
+                </div>
+            </section>
+            <div style="clear: both"></div>
+        </div>
 
-                    <div class="form-group row">
-                        <label for="text" class="col-4 col-form-label">Last Name</label>
-                        <div class="col-8">
-                            <div class="input-group">
-                                <input id="lastName" name="lastName" type="text" class="form-control" data-error-message="Enter Last Name" data-required="required" data-field-name="Last Name" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="text" class="col-4 col-form-label">Email</label>
-                        <div class="col-8">
-                            <div class="input-group">
-                                <input id="emailID" name="emailID" type="email" class="form-control" data-error-message="Enter Email ID" data-required="required" data-field-name="Email ID" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="text" class="col-4 col-form-label">Country</label>
-                        <div class="col-8">
-                            <div class="input-group">
-                                <select id="country" name="country" class="form-control" data-error-message="Select Country" data-required="required" data-field-name="Country">
-                                    <option disabled selected></option>
-                                    <option value="USA">United States of America</option>
-                                    <option value="UK">United Kingdom</option>
-                                    <option value="IN">India</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="text" class="col-4 col-form-label">Password</label>
-                        <div class="col-8">
-                            <div class="input-group">
-                                <input id="pass1" name="pass1" type="password" class="form-control" data-error-message="Enter Password" data-required="required" data-field-name="Password" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="text" class="col-4 col-form-label">Confirmation Password</label>
-                        <div class="col-8">
-                            <div class="input-group">
-                                <input id="pass2" name="pass2" type="password" class="form-control" data-error-message="Enter Confirm Password" data-required="required" data-field-name="Confirm Password" data-match="pass1" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row justify-content-center align-items-center">
-                        <div class="col-6">
-                            <br>
-                            <button class="btn btn-danger btn-block" type="button" id="validateForm">VALIDATE FORM</button>
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-xs-12 col-sm-5" style="margin-top: 3%">
+                <div class="form-group row">
+                    <label for="firstName" class="col-4 col-form-label">First Name</label>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <input id="firstName" name="firstName" type="text" class="form-control"
+                                   data-error-message="Enter First Name" data-maxlength="20" data-minlength="2"
+                                   data-required="required" data-field-name="First Name"/>
                         </div>
                     </div>
                 </div>
-            </div> <!-- Row DIV Ends -->
-        </div> <!-- Container DIV Ends -->
-    </form>
 
-    <script src="k2validator.js"></script>
-    <script>
-        let submitBtn = document.getElementById("validateForm");
-        submitBtn.addEventListener("click", () =>
-        {
-            var formError = validateMyForm("custForm");
-            if (!formError.status)
-            {
-                document.getElementById("error").classList.remove("hide");
-                document.getElementById("error_message").innerHTML = formError.message;
-            }
-            else
-            {
-                document.getElementById("error").classList.add("hide");
-                document.getElementById("error_message").innerHTML = "";
-                alert("Form Validated");
-                return false;
-            }
-        })
-    </script>
+                <div class="form-group row">
+                    <label for="lastName" class="col-4 col-form-label">Last Name</label>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <input id="lastName" name="lastName" type="text" class="form-control"
+                                   data-error-message="Enter Last Name" data-required="required"
+                                   data-field-name="Last Name"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="emailID" class="col-4 col-form-label">Email</label>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <input id="emailID" name="emailID" type="email" class="form-control"
+                                   data-error-message="Enter Email ID" data-required="required"
+                                   data-field-name="Email ID"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="country" class="col-4 col-form-label">Country</label>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <select id="country" name="country" class="form-control" data-error-message="Select Country"
+                                    data-required="required" data-field-name="Country">
+                                <option disabled selected></option>
+                                <option value="USA">United States of America</option>
+                                <option value="UK">United Kingdom</option>
+                                <option value="IN">India</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="pass1" class="col-4 col-form-label">Password</label>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <input id="pass1" name="pass1" type="password" class="form-control"
+                                   data-error-message="Enter Password" data-required="required"
+                                   data-field-name="Password"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="pass2" class="col-4 col-form-label">Confirmation Password</label>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <input id="pass2" name="pass2" type="password" class="form-control"
+                                   data-error-message="Enter Confirm Password" data-required="required"
+                                   data-field-name="Confirm Password" data-match="pass1"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row justify-content-center align-items-center">
+                    <div class="col-6">
+                        <br>
+                        <button class="btn btn-danger btn-block" type="button" id="validateForm">VALIDATE FORM</button>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Row DIV Ends -->
+    </div> <!-- Container DIV Ends -->
+</form>
+
+<script src="k2validator.js"></script>
+<script>
+    let submitBtn = document.getElementById("validateForm");
+    submitBtn.addEventListener("click", () => {
+        var formError = validateMyForm("custForm");
+        if (!formError.status) {
+            document.getElementById("error").classList.remove("hide");
+            document.getElementById("error_message").innerHTML = formError.message;
+        } else {
+            document.getElementById("error").classList.add("hide");
+            document.getElementById("error_message").innerHTML = "";
+            alert("Form Validated");
+            return false;
+        }
+    })
+</script>
 
 </body>
 
