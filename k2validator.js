@@ -2,7 +2,7 @@
  * k2validator.js 0.0.3 - 20 - March - 2021
  * Copyright (c) 2021 Basant Mandal, https://wwww.techbasant.in
  * k2validator.js is open sourced under the MIT license.
- * https://github.com/basantmandal/k2validator
+ * https://github.com/basantmandal/K2-Validator
  */
 
 var defaults = {
